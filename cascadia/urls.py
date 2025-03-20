@@ -18,6 +18,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from cascadia import views
+
+
 urlpatterns = [
+    path("city/<int:pk>/", views.CitiesDetailView.as_view(), name="city-detail"),
     path("admin/", admin.site.urls),
 ]

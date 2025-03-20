@@ -19,6 +19,7 @@ djhtml = "*"
 [packages]
 django = "~=5.1"
 dj-database-url = "~=2.1"
+django-leaflet = "~=0.31"
 gdal = ">3.7, <3.8"
 geopy = "~=2.4"
 gunicorn = "~=23.0"
