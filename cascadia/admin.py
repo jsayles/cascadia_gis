@@ -15,6 +15,6 @@ class LocalGISModelAdmin(GISModelAdmin):
 
 @admin.register(City)
 class CityAdmin(LocalGISModelAdmin):
-    list_display = ["name"]
+    list_display = ["name", "geometry"]
     search_fields = ["name"]
     ordering = ["name"]
