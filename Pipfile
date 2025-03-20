@@ -1,0 +1,28 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[scripts]
+web = "python ./manage.py runserver"
+review = "pip list --outdated"
+
+[requires]
+python_version = "3.13"
+
+[dev-packages]
+ruff = "*"
+ipython = "*"
+pre-commit = "*"
+djhtml = "*"
+
+[packages]
+django = "~=5.1"
+dj-database-url = "~=2.1"
+gdal = ">3.7, <3.8"
+geopy = "~=2.4"
+gunicorn = "~=23.0"
+pip = "~=25.0"
+postgis = "~=1.0"
+psycopg = "~=3.2"
+whitenoise = "~=6.7"
