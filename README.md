@@ -2,7 +2,7 @@
 GIS for Cascadia
 
 ## Cascadia Resources
-https://cascadia-institute.org
-https://cascadiabioregion.org
-https://regeneratecascadia.org
-https://cascadia.ecotopia.today/
+ - https://cascadia-institute.org
+ - https://cascadiabioregion.org
+ - https://regeneratecascadia.org
+ - https://cascadia.ecotopia.today/
