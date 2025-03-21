@@ -22,6 +22,7 @@ from cascadia import views
 
 
 urlpatterns = [
+    path("", views.home, name="home"),
     path("city/<int:pk>/", views.CitiesDetailView.as_view(), name="city-detail"),
     path("admin/", admin.site.urls),
 ]

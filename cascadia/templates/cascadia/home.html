@@ -1,0 +1,20 @@
+{% load leaflet_tags %}
+{% leaflet_css %}
+{% leaflet_js %}
+
+<div>
+    <h1>Cascadia GIS</h1>
+    {% leaflet_map "main" callback="map_init" %}
+</div>
+
+<script type="text/javascript">
+    function map_init(map, options) {
+        // L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        //     maxZoom: 19,
+        //     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        // }).addTo(map);
+
+        map.setView([{{ map.geometry.centroid.y }}, {{ map.geometry.centroid.x }}], 5);
+        L.geoJSON({{ map.geometry.boundary.geojson|safe }}).addTo(map);
+    }
+</script>
