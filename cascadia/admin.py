@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.gis.admin import GISModelAdmin
 
-from cascadia.models import City
+from cascadia.models import Map, City
 
 
 class LocalGISModelAdmin(GISModelAdmin):
@@ -11,6 +11,13 @@ class LocalGISModelAdmin(GISModelAdmin):
             "default_lon": -123.1242487,
         }
     }
+
+
+@admin.register(Map)
+class MapAdmin(LocalGISModelAdmin):
+    list_display = ["name", "geometry"]
+    search_fields = ["name"]
+    ordering = ["name"]
 
 
 @admin.register(City)

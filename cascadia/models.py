@@ -8,6 +8,20 @@ from django.urls import reverse
 logger = logging.getLogger(__name__)
 
 
+class Map(models.Model):
+    name = models.CharField(max_length=100, blank=False)
+    geometry = geomodels.MultiPolygonField()
+
+    class Meta:
+        ordering = ("name",)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("map-detail", kwargs={"pk": self.pk})
+
+
 class City(models.Model):
     name = models.CharField(max_length=100, blank=False)
     geometry = geomodels.PointField()
