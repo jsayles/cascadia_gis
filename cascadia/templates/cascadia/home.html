@@ -16,5 +16,9 @@
 
         map.setView([{{ map.geometry.centroid.y }}, {{ map.geometry.centroid.x }}], 5);
         L.geoJSON({{ map.geometry.boundary.geojson|safe }}).addTo(map);
+        L.geoJSON({{ vancouver.geometry.geojson|safe }}).addTo(map);
+        L.geoJSON({{ seattle.geometry.geojson|safe }}).addTo(map);
+        L.geoJSON({{ portland.geometry.geojson|safe }}).addTo(map);
+
     }
 </script>
