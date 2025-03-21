@@ -5,21 +5,20 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('cascadia', '0001_initial'),
+        ("cascadia", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Map',
+            name="Map",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
-                ('geometry', django.contrib.gis.db.models.fields.MultiPolygonField(srid=4326)),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(max_length=100)),
+                ("geometry", django.contrib.gis.db.models.fields.MultiPolygonField(srid=4326)),
             ],
             options={
-                'ordering': ('name',),
+                "ordering": ("name",),
             },
         ),
     ]

@@ -3,22 +3,29 @@
 {% leaflet_js %}
 
 <div>
-    <h1>Cascadia GIS</h1>
+    <h1>Cascadia</h1>
     {% leaflet_map "main" callback="map_init" %}
 </div>
 
+{{ json_context|json_script:"map_data" }}
 <script type="text/javascript">
     function map_init(map, options) {
-        // L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        //     maxZoom: 19,
-        //     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        // }).addTo(map);
+        const map_data = JSON.parse(document.getElementById('map_data').textContent);
 
-        map.setView([{{ map.geometry.centroid.y }}, {{ map.geometry.centroid.x }}], 5);
-        L.geoJSON({{ map.geometry.boundary.geojson|safe }}).addTo(map);
-        L.geoJSON({{ vancouver.geometry.geojson|safe }}).addTo(map);
-        L.geoJSON({{ seattle.geometry.geojson|safe }}).addTo(map);
-        L.geoJSON({{ portland.geometry.geojson|safe }}).addTo(map);
+        // Center the map
+        map.setView(map_data.center, 5);
 
+        // Add the boundary
+        L.geoJSON(JSON.parse(map_data.boundary)).addTo(map);
+
+        // Add the cities
+        for (let city of map_data.cities) {
+            var city_marker = L.marker([city.lat, city.lon]);
+            city_marker.on('click', function() {
+                window.location.href = city.url;
+            });
+            city_marker.bindPopup("<b>" + city.name + "</b>");
+            city_marker.addTo(map);
+        };
     }
 </script>
