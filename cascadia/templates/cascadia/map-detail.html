@@ -1,0 +1,37 @@
+{% load leaflet_tags %}
+{% leaflet_css %}
+{% leaflet_js %}
+
+<div>
+    <h1>Cascadia</h1>
+    {% leaflet_map "main" callback="map_init" %}
+</div>
+
+{% comment %}
+    Following this article which shows two different ways to pass data into javascript. --JLS
+
+    https://adamj.eu/tech/2022/10/06/how-to-safely-pass-data-to-javascript-in-a-django-template/
+{% endcomment %}
+{{ map.geometry.boundary.geojson|json_script:"boundary" }}
+{{ cities|json_script:"cities" }}
+<script type="text/javascript" data-center-lat="{{ map.geometry.centroid.y }}" data-center-lon="{{ map.geometry.centroid.x }}">
+    const data = document.currentScript.dataset;
+    const map_center = [data.centerLat, data.centerLon];
+    const boundary = JSON.parse(document.getElementById('boundary').textContent);
+    const cities = JSON.parse(document.getElementById('cities').textContent);
+
+    function map_init(map, options) {
+        // Center the map
+        map.setView(map_center, 5);
+
+        // Add the boundary (we need to parse this a second time)
+        L.geoJSON(JSON.parse(boundary)).addTo(map);
+
+        // Add the cities
+        for (let city of cities) {
+            var city_marker = L.marker([city.lat, city.lon]);
+            city_marker.on('click', function() {window.location.href = city.url});
+            city_marker.addTo(map);
+        };
+    }
+</script>

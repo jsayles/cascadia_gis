@@ -4,16 +4,11 @@ from django.shortcuts import render
 from cascadia.models import Map, City
 
 
-def home(request):
-    map = Map.objects.first()
+def map_detail(request, pk=None):
+    map = Map.objects.get(pk=pk) if pk else Map.objects.first()
 
-    # Hardcode cities for now.  Should be a query to get all cities within map boundary.
-    # cities = City.objects.all()
-    vancouver = City.objects.get(id=7256)
-    seattle = City.objects.get(id=7109)
-    portland = City.objects.get(id=6782)
     cities = []
-    for city in [vancouver, seattle, portland]:
+    for city in City.objects.filter(geometry__within=map.geometry):
         cities.append(
             {
                 "name": city.name,
@@ -23,16 +18,11 @@ def home(request):
             }
         )
 
-    json_context = {
-        "center": [map.geometry.centroid.y, map.geometry.centroid.x],
-        "boundary": map.geometry.boundary.geojson,
-        "cities": cities,
-    }
     context = {
         "map": map,
-        "json_context": json_context,
+        "cities": cities,
     }
-    return render(request, "cascadia/home.html", context)
+    return render(request, "cascadia/map-detail.html", context)
 
 
 class CitiesDetailView(DetailView):
