@@ -1,0 +1,14 @@
+asgiref==3.8.1
+dj-database-url==2.3.0
+django==5.2
+django-leaflet==0.31.0
+gdal==3.7.3
+geographiclib==2.0
+geopy==2.4.1
+gunicorn==23.0.0
+packaging==24.2
+postgis==1.0.4
+psycopg==3.2.6
+sqlparse==0.5.3
+typing-extensions==4.13.1
+whitenoise==6.9.0

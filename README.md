@@ -13,3 +13,12 @@ GIS for Cascadia
  - https://cascadiabioregion.org
  - https://regeneratecascadia.org
  - https://cascadia.ecotopia.today/
+
+ ## UV Tips
+ ```
+ uv venv
+ source .venv/bin/activate
+ uv install
+ uv run --env-file .env ./manage.py shell
+ uv run --env-file .env ./manage.py runserver
+ uv pip freeze > requirements.txt
